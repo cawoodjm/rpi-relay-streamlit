@@ -7,7 +7,7 @@ After=network.target
 User=pi
 WorkingDirectory=/home/pi/rpi-gpio-streamlit
 # Adjust paths if you used a different virtual environment name or location
-ExecStart=/home/pi/rpi-gpio-streamlit/venv/bin/streamlit run app.py --server.port 8501 --server.address 0.0.0.0
+ExecStart=/home/pi/rpi-gpio-streamlit/venv/bin/streamlit run app.py
 Restart=always
 
 [Install]
