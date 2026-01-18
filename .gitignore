@@ -155,5 +155,9 @@ cython_debug/
 .DS_Store
 Thumbs.db
 
+# IDE Support
+.idea/
+.vscode/
+
 # Project specific
 app.log
