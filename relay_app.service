@@ -1,0 +1,14 @@
+[Unit]
+Description=Streamlit Relay Control
+After=network.target
+
+[Service]
+# Replace 'pi' with your actual username if different
+User=pi
+WorkingDirectory=/home/pi/rpi-gpio-streamlit
+# Adjust paths if you used a different virtual environment name or location
+ExecStart=/home/pi/rpi-gpio-streamlit/venv/bin/streamlit run app.py --server.port 8501 --server.address 0.0.0.0
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
