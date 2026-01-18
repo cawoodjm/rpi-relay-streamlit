@@ -135,5 +135,10 @@ tail -f app.log
 
 ## Troubleshooting
 
+- **Page Stuck on Loading**: If the page shows a "loading" skeleton and never finishes:
+  - **Check the Port**: Ensure you are using `:8501` in the URL (e.g., `http://192.168.1.169:8501`). The screenshot provided shows the port might be missing.
+  - **CORS/XSRF**: This is often caused by Streamlit's security blocking the websocket connection. We have added a `.streamlit/config.toml` to disable these checks for local networks.
+  - **Reverse Proxy**: If you are using Nginx or another proxy on port 80, ensure it is configured to support WebSockets.
+- **Missing Password Field**: If the page loads but you don't see the password field, check if you created the `.env` file from `.env.example`.
 - **Permissions**: If the relays don't trigger, check if the `pi` user (or whichever user runs the app) has permissions to execute `pinctrl` via `sudo`.
 - **Type Warnings**: You might see type warnings in your IDE regarding `st.spinner`. These are false positives related to Streamlit's dynamic nature and can be safely ignored.
