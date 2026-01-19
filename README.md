@@ -30,7 +30,7 @@ The Waveshare Relay Board documentation mentions several dependencies. For the R
 Install the required system packages and Python development headers:
 ```bash
 sudo apt update
-sudo apt install python-dev-is-python3 RPi.GPIO
+sudo apt install python-dev-is-python3
 ```
 
 ### 2. WiringPi (Version 3.x for RPi 5)
@@ -123,8 +123,10 @@ To ensure the app starts automatically on boot:
 
 ## Security
 
-- **Tailscale**: It is highly recommended to use [Tailscale](https://tailscale.com/) to access your Pi. This avoids opening ports on your router.
-- **Password Protection**: Streamlit does not offer in the community addition authentication out of the box. To get around that, we set up authentication using a password (defined in `.env`) before showing the control panel.
+- **VPN Recommended**: This application is designed to be accessed over a secure VPN (like [Tailscale](https://tailscale.com/)). It is **not recommended** to expose this application to the public internet.
+- **Authentication**: Access is protected by a password defined in the `.env` file (`AUTH_PASSWORD`). Failed attempts are slowed down to prevent brute-force attacks.
+- **CORS and XSRF**: Currently, CORS and XSRF protections are disabled in `.streamlit/config.toml` to ensure compatibility with various network setups. This means the application could be vulnerable to Cross-Site Request Forgery (CSRF) if a user is logged in and visits a malicious website. Accessing the app only via a VPN significantly reduces this risk.
+- **Minimal Sudo**: If you use the `sudoers` configuration recommended for `pinctrl`, the application only gains elevated privileges for that specific binary, minimizing the impact of a potential compromise.
 
 ## Logging
 
