@@ -45,7 +45,7 @@ def check_password():
         st.text_input(
             "Password", type="password", on_change=password_entered, key="password"
         )
-        st.error("😕 Password incorrect")
+        st.error("Password incorrect")
         return False
     else:
         # Password correct.
@@ -95,12 +95,12 @@ def toggle_relay(channel, action):
 # --- MAIN APP ---
 def main():
     try:
-        st.set_page_config(page_title="FlexRadio Power Control", page_icon="🔌", layout="centered")
+        st.set_page_config(page_title="FlexRadio Remote Power Control", layout="centered")
 
         if not check_password():
             st.stop()
 
-        st.title("🔌 FlexRadio Power Control")
+        st.title("FlexRadio Remote Power Control")
         st.info("Connected via Tailscale Secure Network")
 
         channels = ["CH1", "CH2", "CH3"]
