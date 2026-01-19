@@ -121,6 +121,9 @@ To ensure the app starts automatically on boot:
    sudo systemctl start relay_app.service
    ```
 
+## UI Example
+![UI Example](images/App UI Example.png)
+
 ## Security
 
 - **VPN Recommended**: This application is designed to be accessed over a secure VPN (like [Tailscale](https://tailscale.com/)). It is **not recommended** to expose this application to the public internet.
