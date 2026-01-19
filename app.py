@@ -20,12 +20,14 @@ Author: Joseph Cawood
 License: GPL-3.0
 """
 
-import streamlit as st
 import subprocess
 import os
-import dotenv
+import dotenv  # pylint: disable=import-error
 import logging
 import time
+
+"Third-party imports"
+import streamlit as st  # pylint: disable=import-error
 
 # --- LOGGING CONFIGURATION ---
 logging.basicConfig(
@@ -79,15 +81,16 @@ def check_password():
             "Password", type="password", on_change=password_entered, key="password"
         )
         return False
-    elif not st.session_state["password_correct"]:
+
+    if not st.session_state["password_correct"]:
         st.text_input(
             "Password", type="password", on_change=password_entered, key="password"
         )
         st.error("Password incorrect")
         return False
-    else:
-        # Password correct.
-        return True
+
+    # Password correct.
+    return True
 
 
 # --- RELAY CONTROL LOGIC ---
@@ -109,10 +112,11 @@ def toggle_relay(channel, action):
         str: The output from the shell script if successful, or an error
         message if there was a failure.
     """
-    # Use absolute path for the script to ensure it's found and to prevent execution of shadowed files
+    # Use absolute path for the script to ensure it's found
+    # and to prevent execution of shadowed files
     script_dir = os.path.dirname(os.path.abspath(__file__))
     script_path = os.path.join(script_dir, "Relay.sh")
-    logger.info(f"Attempting to toggle {channel} to {action}")
+    logger.info("Attempting to toggle %s to %s", channel, action)
 
     # Ensure script exists
     if not os.path.exists(script_path):
@@ -123,9 +127,9 @@ def toggle_relay(channel, action):
     # Ensure script is executable
     if not os.access(script_path, os.X_OK):
         try:
-            logger.info(f"Setting executable permissions on {script_path}")
+            logger.info("Setting executable permissions on %s", script_path)
             os.chmod(script_path, 0o755)
-        except Exception as e:
+        except OSError as e:
             err_msg = f"Error setting permissions: {e}"
             logger.exception(err_msg)
             return err_msg
@@ -139,13 +143,16 @@ def toggle_relay(channel, action):
             check=True
         )
         output = result.stdout.strip()
-        logger.info(f"Command successful. Output: {output}")
+        logger.info("Command successful. Output: %s", output)
         return output
     except subprocess.CalledProcessError as e:
         err_msg = f"Script error: {e.stderr.strip() if e.stderr else e.stdout.strip()}"
-        logger.error(f"CalledProcessError: {err_msg}")
+        logger.error("CalledProcessError: %s", err_msg)
         return err_msg
-    except Exception as e:
+    except OSError as e:
+        logger.exception("Subprocess execution failed: %s", e)
+        return "An error occurred during relay control execution. Check app.log for details."
+    except Exception:  # pylint: disable=broad-exception-caught
         logger.exception("Unexpected error during script execution")
         return "An unexpected error occurred during relay control. Check app.log for details."
 
@@ -181,7 +188,7 @@ def main():
             with cols[i]:
                 st.markdown(f"### {ch}")
 
-                if st.button(f"ON", key=f"on_{ch}", use_container_width=True):
+                if st.button("ON", key=f"on_{ch}", use_container_width=True):
                     with st.spinner(f"Turning ON {ch}..."):
                         res = toggle_relay(ch, "ON")
                         if "Error" in res or "error" in res:
@@ -189,7 +196,7 @@ def main():
                         else:
                             st.success(res)
 
-                if st.button(f"OFF", key=f"off_{ch}", type="primary", use_container_width=True):
+                if st.button("OFF", key=f"off_{ch}", type="primary", use_container_width=True):
                     with st.spinner(f"Turning OFF {ch}..."):
                         res = toggle_relay(ch, "OFF")
                         if "Error" in res or "error" in res:
@@ -204,7 +211,7 @@ def main():
                 del st.session_state[key]
             st.rerun()
 
-    except Exception:
+    except Exception:  # pylint: disable=broad-exception-caught
         logger.exception("Global application error")
         st.error("A critical error occurred. Please check the logs (app.log) for more details.")
 
