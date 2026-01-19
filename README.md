@@ -122,7 +122,7 @@ To ensure the app starts automatically on boot:
    ```
 
 ## UI Example
-![UI Example](images/App UI Example.png)
+![UI Example](images/App_UI_Example.png)
 
 ## Security
 
