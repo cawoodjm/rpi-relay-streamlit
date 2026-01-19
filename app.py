@@ -26,7 +26,7 @@ import dotenv  # pylint: disable=import-error
 import logging
 import time
 
-"Third-party imports"
+# Third-party imports
 import streamlit as st  # pylint: disable=import-error
 
 # --- LOGGING CONFIGURATION ---
