@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=Install FlexRadio Relay Power Control
 Comment=Install and Configure Relay Control
-Exec=bash -c 'D="%k"; if [ "$D" == "%k" ] || [ -z "$D" ]; then D="$1"; fi; if [ -z "$D" ]; then D="./Install.desktop"; fi; D="${D#file://}"; cd "$(dirname "$D")" || exit 1; if [ -f install.sh ]; then chmod +x install.sh && ./install.sh; else echo "Error: install.sh not found"; fi; read -p "Press enter to close..." -n1 -s' -- %k
+Exec=bash -c 'D="%k"; if [ "$D" = "%%k" ] || [ "$D" = "%k" ] || [ -z "$D" ]; then D="$1"; fi; D="${D#file://}"; if [ -z "$D" ] || [ ! -f "$D" ]; then D="./Install.desktop"; fi; if [ -f "$D" ]; then cd "$(dirname "$D")"; fi; echo "Installation directory: $(pwd)"; if [ -f install.sh ]; then chmod +x install.sh && ./install.sh; else echo "Error: install.sh not found in $(pwd)"; fi; read -p "Press enter to close..." -n1 -s' -- %k
 Path=
 Icon=system-software-install
 Terminal=true
