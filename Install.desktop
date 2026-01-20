@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=Install FlexRadio Relay Power Control
 Comment=Install and Configure Relay Control
-Exec=bash -c "cd $(dirname %k) && chmod +x install.sh && ./install.sh; read -p 'Press enter to close...' -n1 -s"
+Exec=bash -c 'cd "$(dirname "$1")" && chmod +x install.sh && ./install.sh; read -p "Press enter to close..." -n1 -s' -- %k
 Icon=system-software-install
 Terminal=true
 Type=Application

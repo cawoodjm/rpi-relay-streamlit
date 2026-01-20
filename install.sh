@@ -9,6 +9,9 @@ echo "------------------------------------------------"
 echo "  FlexRadio Relay Power Control Installer"
 echo "------------------------------------------------"
 
+# 0. Change to the script's directory
+cd "$(dirname "$0")"
+
 # 1. Check/Install System Dependencies
 echo "[1/7] Checking system dependencies..."
 MISSING_PKGS=()
