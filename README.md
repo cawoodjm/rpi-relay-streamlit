@@ -24,10 +24,10 @@ This project is configured for the **Waveshare RPi Relay Board (3-ch)**.
 
 ## Waveshare Software Setup
 
-The Waveshare Relay Board documentation mentions several dependencies. For the Raspberry Pi 5, it is important to use updated versions of these libraries due to changes in the GPIO hardware (the new RP1 chip).
+The Waveshare Relay Board documentation mentions several dependencies. For the Raspberry Pi 5, it is important to use updated versions of these libraries due to changes in the GPIO hardware (the new RP1 chip). A few things to note where the Waveshare documentation is not clear or stale.
 
 ### 1. System Dependencies
-Install the required system packages and Python development headers:
+Install the required system packages and development headers necessary for compiling Python extensions:
 ```bash
 sudo apt update
 sudo apt install python-dev-is-python3
@@ -65,13 +65,27 @@ Verify the installation by running `gpio -v`.
 
 ## Installation
 
+### Simple Installation (Recommended for RPi Desktop)
+1. **Download/Clone** the project folder to your Raspberry Pi.
+2. **Double-click `Install.desktop`** in the file manager.
+3. Choose **"Run in Terminal"** if prompted.
+4. Follow the on-screen instructions to set your password and configure the service.
+
+### Manual Installation (Recommended for the brave)
 1. **Clone the repository**:
    ```bash
    git clone <your-repo-url>
-   cd rpi-gpio-streamlit
+   cd rpi-relay-streamlit
    ```
 
-2. **Set up a Virtual Environment**:
+2. **Run the installer**:
+   ```bash
+   chmod +x install.sh
+   ./install.sh
+   ```
+   *Alternatively, follow the manual steps below.*
+
+3. **Set up a Virtual Environment**:
    ```bash
    python3 -m venv venv
    source venv/bin/activate
