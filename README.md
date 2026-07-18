@@ -65,16 +65,23 @@ Verify the installation by running `gpio -v`.
 
 ## Installation
 
-### Simple Installation (Recommended for RPi Desktop)
-1. **Download/Clone** the project folder to your Raspberry Pi.
-2. **Double-click `Install.desktop`** in the file manager.
-3. Choose **"Run in Terminal"** if prompted.
-4. Follow the on-screen instructions to set your password and configure the service.
+### Quick Install (Recommended)
+Run this one-liner in a terminal on your Raspberry Pi. It clones the repo into `~/rpi-relay-streamlit` (or updates it if already present) and hands off to the interactive installer:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/cawoodjm/rpi-relay-streamlit/main/remote-install.sh | bash
+```
+
+Follow the on-screen prompts to set your password and optionally configure the systemd service and desktop shortcut. To install into a different directory, set `INSTALL_DIR` first:
+
+```bash
+INSTALL_DIR=/opt/rpi-relay-streamlit curl -fsSL https://raw.githubusercontent.com/cawoodjm/rpi-relay-streamlit/main/remote-install.sh | bash
+```
 
 ### Manual Installation (Recommended for the brave)
 1. **Clone the repository**:
    ```bash
-   git clone <your-repo-url>
+   git clone https://github.com/cawoodjm/rpi-relay-streamlit.git
    cd rpi-relay-streamlit
    ```
 
