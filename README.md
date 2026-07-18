@@ -24,10 +24,10 @@ This project is configured for the **Waveshare RPi Relay Board (3-ch)**.
 
 ## Waveshare Software Setup
 
-The Waveshare Relay Board documentation mentions several dependencies. For the Raspberry Pi 5, it is important to use updated versions of these libraries due to changes in the GPIO hardware (the new RP1 chip).
+The Waveshare Relay Board documentation mentions several dependencies. For the Raspberry Pi 5, it is important to use updated versions of these libraries due to changes in the GPIO hardware (the new RP1 chip). A few things to note where the Waveshare documentation is not clear or stale.
 
 ### 1. System Dependencies
-Install the required system packages and Python development headers:
+Install the required system packages and development headers necessary for compiling Python extensions:
 ```bash
 sudo apt update
 sudo apt install python-dev-is-python3
@@ -65,13 +65,34 @@ Verify the installation by running `gpio -v`.
 
 ## Installation
 
+### Quick Install (Recommended)
+Run this one-liner in a terminal on your Raspberry Pi. It clones the repo into `~/rpi-relay-streamlit` (or updates it if already present) and hands off to the interactive installer:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/cawoodjm/rpi-relay-streamlit/main/remote-install.sh | bash
+```
+
+Follow the on-screen prompts to set your password and optionally configure the systemd service and desktop shortcut. To install into a different directory, set `INSTALL_DIR` first:
+
+```bash
+INSTALL_DIR=/opt/rpi-relay-streamlit curl -fsSL https://raw.githubusercontent.com/cawoodjm/rpi-relay-streamlit/main/remote-install.sh | bash
+```
+
+### Manual Installation (Recommended for the brave)
 1. **Clone the repository**:
    ```bash
-   git clone <your-repo-url>
-   cd rpi-gpio-streamlit
+   git clone https://github.com/cawoodjm/rpi-relay-streamlit.git
+   cd rpi-relay-streamlit
    ```
 
-2. **Set up a Virtual Environment**:
+2. **Run the installer**:
+   ```bash
+   chmod +x install.sh
+   ./install.sh
+   ```
+   *Alternatively, follow the manual steps below.*
+
+3. **Set up a Virtual Environment**:
    ```bash
    python3 -m venv venv
    source venv/bin/activate

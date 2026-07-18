@@ -20,6 +20,7 @@ Author: Joseph Cawood
 License: GPL-3.0
 """
 
+import hmac
 import subprocess
 import os
 import dotenv  # pylint: disable=import-error
@@ -66,7 +67,7 @@ def check_password():
             logger.error("AUTH_PASSWORD environment variable is missing or empty.")
             return
 
-        if input_password == correct_password:
+        if hmac.compare_digest(input_password, correct_password):
             st.session_state["password_correct"] = True
             logger.info("User authenticated successfully.")
             del st.session_state["password"]  # don't store password
