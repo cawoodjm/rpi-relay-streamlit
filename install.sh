@@ -28,7 +28,7 @@ if ! command -v gpio &> /dev/null; then
 fi
 
 # Check for python-dev-is-python3
-if ! dpkg -l | grep -q "python-dev-is-python3"; then
+if ! dpkg -s python-dev-is-python3 &> /dev/null; then
     MISSING_PKGS+=("python-dev-is-python3")
 fi
 
